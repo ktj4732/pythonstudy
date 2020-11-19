@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block header %}
+
+<style>
+    img {
+        width: 200;
+        height: 200;
+    }
+
+    #submenu {
+        margin-bottom: 30px;
+    }
+
+    table tr:nth-child(4) {
+        height: 100px;
+    }
+
+    #submenu3 {
+        background-color: silver;
+    }
+</style>
+
+{% endblock %}
+
+{% block contents %}
+<h3>상품리스트</h3>
+<div class="row mt-3">
+    {% for product in products %}
+    <div class="col-4 mt-4">
+        <table class="table table-bordered text-center" onclick="location.href='/product/detail/{{ product.id }}'">
+            <tr>
+                <th>{{ product.name }}</th>
+            </tr>
+            <tr>
+                <th><img src="/media/{{ product.productimg }}" alt=""></th>
+            </tr>
+            <tr>
+                <th>{{ product.price }}원</th>
+            </tr>
+            <tr>
+                <th>{{ product.description }}</th>
+            </tr>
+            <tr>
+                <th>판매자 : {{ product.reguser }}</th>
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+    <div class="col-12 mt-3 mb-5">
+        <button class="btn btn-primary" onclick="location.href='/product/register/'">상품등록하기</button>
+    </div>
+</div>
+
+<script>
+    $("table").hover(function () {
+        $(this).css('cursor', 'pointer').css('background', 'silver');
+    }, function () {
+        $(this).css('background', 'white');
+    });
+</script>
+{% endblock %}

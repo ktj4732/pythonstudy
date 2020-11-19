@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block header %}
+<style>
+    .title {
+        font-size: 2em;
+    }
+
+    h3 {
+        text-align: center;
+
+    }
+
+    #boardview {
+        border: 3px solid black;
+    }
+
+    .productimg {
+        width: 200px;
+        height: 200px;
+    }
+
+
+    /* .homeproductlist tr:nth-child(2) {
+        height: 100px;
+    } */
+</style>
+{% endblock %}
+
+{% block contents %}
+
+<div class="row mt-5">
+    <div class="col-3" id="userview">
+        {% if request.session.user %}
+        <table class="table table-bordered text-center" style="border: 3px solid black;">
+            <tr style="border: 3px solid black;">
+                <th>{{ username }}</th>
+            </tr>
+            <tr style="border: 3px solid black;">
+                <td>{{ useremail }}</td>
+            </tr>
+            <tr style="border: 3px solid black;">
+                <td><img src="/media/{{ userimg }}" alt="" width="100"></td>
+            </tr>
+
+        </table>
+
+
+
+        {% endif %}
+
+    </div>
+    <div class="col-9" id="boardview">
+        <!-- {{ user.username }} -->
+        <h3 class="mt-3">게시판</h3>
+        <table class="table table-bordered">
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>등록날짜</th>
+            </tr>
+            {% for board in board %}
+            <tr>
+                <td>{{ board.id }}</td>
+                <td>{{ board.title }}</td>
+                <td>{{ board.writer }}</td>
+                <td>{{ board.regdate }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button onclick="location.href='/board/list'" class="btn btn-default mb-3"
+            style="border: 1px solid black;">더보기</button>
+    </div>
+</div>
+
+<div class="col-12 mt-5 text-center">
+    <h3>상품리스트</h3>
+</div>
+<div class="row mt-3">
+    {% for product in product %}
+    <div class="col-4 ">
+        <table class="table table-bordered text-center homeproductlist"
+            onclick="location.href='/product/detail/{{ product.id }}'">
+            <tr>
+                <th>{{ product.name }}</th>
+            </tr>
+            <tr>
+                <th><img src="/media/{{ product.productimg }}" alt="" class="productimg"></th>
+            </tr>
+            <tr>
+                <th>{{ product.price }}원</th>
+            </tr>
+            <tr>
+                <th>{{ product.description }}</th>
+            </tr>
+            <tr>
+                <th>판매자 : {{ product.reguser }}</th>
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+<script>
+    $(".homeproductlist").hover(function () {
+        $(this).css('cursor', 'pointer').css('background', 'silver');
+    }, function () {
+        $(this).css('background', 'white');
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+<style>
+    #submenu {
+        margin-bottom: 30px;
+    }
+</style>
+{% endblock %}
+
+
+{% block contents %}
+
+<h3>
+    주문상세보기
+</h3>
+<div class="row" style="margin-top: 20px;">
+    <div class="col-4">
+        <table class="table table-bordered">
+            <tr>
+                <th>주문번호 : {{ order.id }}</th>
+            </tr>
+            <tr>
+                <th>주문자 : {{ order.userid }}</th>
+            </tr>
+            <tr>
+                <th>주문날짜 : {{ order.orderdate }}</th>
+            </tr>
+            <tr>
+                <td><img src="/media/{{ order.productimg }}" alt=""></td>
+            </tr>
+            <tr>
+                <td>상품금액 : {{ order.countprice }}원 </td>
+
+            </tr>
+            <tr>
+                <td>주문수량 : {{ order.quantity }}개</td>
+
+            </tr>
+            <tr>
+                <td>총금액 : {{ order.price }}원</td>
+            </tr>
+            <tr>
+                <td>배송지 : {{ order.address }}</td>
+            </tr>
+
+        </table>
+        <br>
+
+        <button class="btn btn-default" onclick="location.href='/order/list'"
+            style="border: 1px solid black;">목록보기</button>
+        <button class="btn btn-default" onclick="location.href='/order/update/{{ order.id }}'"
+            style="border: 1px solid black;">주문수정하기</button>
+    </div>
+</div>
+
+{% endblock %}

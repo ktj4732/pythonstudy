@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block header %}
+<style>
+    #submenu {
+        margin-bottom: 30px;
+    }
+</style>
+{% endblock %}
+
+{% block contents %}
+<h3>주문수정하기</h3>
+<div class="col-8">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            상품명<input type="text" class="form-control" value="{{ productname }}" name="productname" readonly>
+        </div>
+        <div class="form-group">
+            <img src="/media/{{ productimg }}" alt="">
+        </div>
+        <div class="form-group">
+            가격<input type="text" class="form-control" value="{{ productprice }}원" name="productprice" readonly>
+        </div>
+        <div class="form-group">
+            수량<input type="number" class="form-control" name="quantity">
+        </div>
+        <div class="form-group">
+            구매자<input type="text" class="form-control" value="{{ username }}" name="username" readonly>
+        </div>
+        <div class="form-group">
+            주소<input type="text" class="form-control" name="address" placeholder="주소를 입력하세요">
+        </div>
+
+        <button type="submit" class="btn btn-default" style="border: 1px solid black;">수정하기</button>
+
+
+
+    </form>
+</div>
+
+{% endblock %}

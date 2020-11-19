@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block header %}
+<style>
+    .form-group {
+        width: 50%;
+    }
+</style>
+{% endblock %}
+
+{% block contents %}
+<div class="col-6">{{ error }}</div>
+<div class="col-12">
+    <form method="POST" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">이름</label>
+            <input type="text" class="form-control" id="username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="userid">아이디</label>
+            <input type="text" class="form-control" id="userid" name="userid">
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="form-group">
+            <label for="repassword">비밀번호확인</label>
+            <input type="password" class="form-control" id="repassword" name="repassword">
+        </div>
+        <div class="form-group">
+            <label for="useremail">이메일</label>
+            <input type="email" class="form-control" id="useremail" name="useremail">
+        </div>
+        <div class="form-group">
+            <label for="userimg">유저이미지</label>
+            <input type="file" class="form-control" id="userimg" name="userimg">
+        </div>
+
+        <button type="submit" class="btn btn-primary">가입하기</button>
+
+    </form>
+
+
+</div>
+
+
+{% endblock %}

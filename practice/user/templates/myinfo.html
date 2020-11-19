@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+<style>
+    img {
+        width: 100;
+    }
+
+    #submenu1 {
+        background-color: silver;
+    }
+
+    .productlist {
+        margin-left: 100px;
+        margin-top: -3px;
+    }
+</style>
+
+{% endblock %}
+
+
+
+
+{% block contents %}
+<div class="row mt-5">
+    <div class="col-4">
+        <h3>
+            MY INFO
+        </h3>
+    </div>
+    <div class="col-6 productlist">
+        <h3>
+            MY PRODUCT LIST
+        </h3>
+    </div>
+    <div class="col-4">
+        <table class=" table table-bordered">
+            <tr>
+                <th>이름 : {{ username }}</th>
+            </tr>
+            <tr>
+                <td><img src="/media/{{ userimg }}"></img></td>
+            <tr>
+                <td>아이디 : {{ userid }}</td>
+            </tr>
+            <tr>
+                <td>이메일 : {{ useremail }}</td>
+            </tr>
+            <tr>
+                <td>가입일 : {{ userregdate }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-6 productlist">
+        <table class=" table table-bordered">
+            <tr>
+                <th>상품번호 </th>
+                <th>상품명 </th>
+                <th>상품가격 </th>
+                <th>등록일 </th>
+            </tr>
+            {% for product in product %}
+            <tr onclick="location.href='/product/detail/{{ product.id }}'" class="infoproductlist">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}원</td>
+                <td>{{ product.regdate }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-12" style="margin-bottom: 50px; margin-top: 30px;">
+        <h3>
+            MY ORDER LIST
+        </h3>
+        <table class="table table-bordered">
+            <tr>
+                <th>주문날짜 </th>
+                <th>상품명 </th>
+                <th>주문수량 </th>
+                <th>총금액 </th>
+                <th>배송지 </th>
+            </tr>
+            {% for order in order %}
+            <tr onclick="location.href='/order/detail/{{ order.id }}'" class="orderlist">
+                <td>{{ order.orderdate }}</td>
+                <td>{{ order.product }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.price }}원</td>
+                <td>{{ order.address }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button class="btn btn-primary" onclick="location.href='/order/list'">더보기</button>
+    </div>
+</div>
+
+<script>
+    $(".orderlist").hover(function () {
+        $(this).css('background', 'silver').css('cursor', 'pointer');
+    }, function () {
+        $(this).css('background', 'white');
+    });
+    $(".infoproductlist").hover(function () {
+        $(this).css('background', 'silver').css('cursor', 'pointer');
+    }, function () {
+        $(this).css('background', 'white');
+    });
+
+</script>
+{% endblock %}

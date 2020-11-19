@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block header %}
+<style>
+    #submenu {
+        margin-bottom: 30px;
+    }
+
+    .listtable {}
+
+    table tr td img {
+        height: 200px;
+        width: 200px;
+    }
+
+    #submenu4 {
+        background-color: silver;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block contents %}
+<h3>
+    나의 주문내역
+</h3>
+<div class="row">
+    {% for order in orders %}
+    <div class="col-4 mb-5 orderlist">
+        <br>
+        <table class="table table-bordered text-center listtable" onclick="location.href='/order/detail/{{ order.id }}'"
+            style="cursor: pointer;">
+            <tr>
+                <th>주문번호 : {{ order.id }}</th>
+            </tr>
+            <tr>
+                <th>주문날짜 : {{ order.orderdate }}</th>
+            </tr>
+            <tr>
+                <td><img src="/media/{{ order.productimg }}" alt=""></td>
+            </tr>
+            <tr>
+                <td>상품금액 : {{ order.countprice }}원 </td>
+
+            </tr>
+            <tr>
+                <td>주문수량 : {{ order.quantity }}개</td>
+
+            </tr>
+            <tr>
+                <td>총금액 : {{ order.price }}원</td>
+            </tr>
+            <tr>
+                <td>배송지 : {{ order.address }}</td>
+            </tr>
+        </table>
+        <button class="btn btn-danger" onclick=" location.href='/order/delete/{{ order.id }}'">주문취소하기</button>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    $(".btn-danger").click(function () {
+        alert('주문이 취소되었습니다.');
+    });
+    $(".listtable").hover(function () {
+        $(this).css('background', 'silver')
+    }, function () {
+        $(this).css('background', 'white')
+    });
+</script>
+
+{% endblock %}
